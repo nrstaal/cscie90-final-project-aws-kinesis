@@ -1,3 +1,16 @@
+#!env python
+#To run this producer, you will have to create a Twitter app from
+#apps.twitter.com. Once you have created an app, you will have to copy and paste
+#the consumer key and consumer secret into the variables below. You will also 
+#have to generate an access token and access token secret and insert those below
+#as well.
+#
+#You will also have to create a kinesis stream. This logic is not provided in
+#the twitter stream producer. Once you have created a kinesis stream, insert
+#the stream name and region below. This script assumes the stream will only have
+#one shard, as it is only a sample prototype script.
+#
+
 import sys
 from __future__ import absolute_import, print_function
 from tweepy.streaming import StreamListener
