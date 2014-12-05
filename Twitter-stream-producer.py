@@ -5,7 +5,7 @@ from tweepy import Stream
 
 # Go to http://apps.twitter.com and create an app.
 # The consumer key and secret will be generated for you after
-consumer_key="insertkey"
+consumer_key=""
 consumer_secret=""
 
 # After the step above, you will be redirected to your app's page.
