@@ -11,12 +11,12 @@
 #one shard, as it is only a sample prototype script.
 #
 
-import sys
 from __future__ import absolute_import, print_function
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 from boto import kinesis
+import sys
 
 # Go to http://apps.twitter.com and create an app.
 # The consumer key and secret will be generated for you after
@@ -45,9 +45,9 @@ def put_tweet_in_stream(tweet):
         sys.stderr.write("Encountered an exception while trying to put a tweet: "
                          + tweet + " into stream: " + stream_name + " exception was: " + str(e))
 
-class StdOutListener(StreamListener):
-    """ A listener handles tweets are the received from the stream.
-    This is a basic listener that just prints received tweets to stdout.
+class PutKinesisListener(StreamListener):
+    """ A listener handles tweets received from the stream.
+    This is a basic listener that puts received tweets to the Kinesis stream.
     """
     def on_data(self, data):
         put_tweet_in_stream(data)
@@ -57,8 +57,9 @@ class StdOutListener(StreamListener):
         print(status)
 
 if __name__ == '__main__':
-    l = StdOutListener()
+    l = PutKinesisListener()
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth, l)
     stream.sample()
+
