@@ -40,6 +40,7 @@ def put_tweet_in_stream(tweet):
     :type tweet: str
     """
     try:
+        tweet_text = json.loads(tweet)['text']
         conn.put_record(stream_name,tweet,shard_name)
     except Exception as e:
         sys.stderr.write("Encountered an exception while trying to put a tweet: "
